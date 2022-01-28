@@ -1,9 +1,7 @@
 package com.nagy.sprinAPI.FirstRestful.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -24,5 +22,16 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudents() {
         return service.getStudents();
+    }
+
+    @PostMapping
+    public void registerNewStudent(@RequestBody Student student){
+
+        service.addNewStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long id) {
+        service.deleteStudent(id);
     }
 }
